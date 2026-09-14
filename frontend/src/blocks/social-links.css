@@ -1,0 +1,32 @@
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--color-pink);
+  font-size: 17px;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.social-link__icon {
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-acid);
+
+  -webkit-mask-image: var(--social-icon);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+
+  mask-image: var(--social-icon);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+.social-link:hover {
+  color: var(--color-acid);
+}

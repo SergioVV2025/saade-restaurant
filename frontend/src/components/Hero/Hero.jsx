@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 
+import heroVideo from "../../assets/home_media/pexels_7.mp4";
+
 function Hero() {
   return (
     <section className="hero">
+      <video
+        className="hero__video"
+        src={heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+
       <div className="hero__content">
         <p className="hero__eyebrow">Silver Lake · Los Angeles</p>
 
@@ -25,11 +36,6 @@ function Hero() {
             View menu
           </Link>
         </div>
-      </div>
-
-      <div className="hero__graphic" aria-hidden="true">
-        <span className="hero__star">✦</span>
-        <span className="hero__word">saade</span>
       </div>
     </section>
   );
