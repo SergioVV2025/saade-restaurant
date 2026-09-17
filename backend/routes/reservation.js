@@ -14,7 +14,6 @@ import auth from "../middlewares/auth.js";
 
 router.post(
   "/reservations",
-  auth,
   validateReservation,
   controllers.createReservation,
 );

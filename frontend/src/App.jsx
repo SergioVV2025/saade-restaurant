@@ -102,6 +102,12 @@ function App() {
     setAuthError("");
   }
 
+  function handleReservationSignup(email) {
+    setSignupEmail(email);
+    setIsSignupPopupOpen(true);
+    setAuthError("");
+  }
+
   function closeAllPopups() {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
@@ -125,14 +131,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/reservation"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Reservation />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/reservation" element={<Reservation />} />
         <Route
           path="/my-reservations"
           element={

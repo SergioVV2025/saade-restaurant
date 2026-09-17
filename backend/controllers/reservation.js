@@ -16,7 +16,7 @@ const createReservation = async (req, res, next) => {
       date,
       time,
       guests,
-      owner: req.user._id,
+      // owner: req.user._id,
     });
     res.status(201).json({
       name: newReservation.name,

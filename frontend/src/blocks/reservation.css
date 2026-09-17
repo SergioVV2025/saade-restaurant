@@ -1,13 +1,20 @@
 .reservation-page {
-  min-height: 100vh;
+  min-height: 79vh;
   padding: 72px 8%;
   background-color: var(--color-pink);
   color: var(--color-brown);
 }
 
+.reservation-page__layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: start;
+}
+
 .reservation-page__intro {
-  max-width: 780px;
-  margin-bottom: 48px;
+  max-width: 620px;
+  margin: 0;
 }
 
 .reservation-page__eyebrow {
@@ -34,7 +41,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  max-width: 1000px;
+  max-width: 760px;
 }
 
 .reservation__field {
@@ -156,6 +163,18 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.confirmation-popup__button {
+  margin-top: 28px;
+  padding: 14px 30px;
+  border: 2px solid var(--color-brown);
+  border-radius: 999px;
+  background-color: var(--color-acid);
+  color: var(--color-brown);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
