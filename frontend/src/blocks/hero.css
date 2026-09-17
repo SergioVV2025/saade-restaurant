@@ -8,6 +8,8 @@
 
   padding: 64px 8%;
 
+  background-color: var(--color-brown);
+
   color: var(--color-cream);
 }
 
