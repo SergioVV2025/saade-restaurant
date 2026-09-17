@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-import heroVideo from "../../assets/home_media/pexels_7.mp4";
+import heroVideo from "../../assets/home_media/hero-video.mp4";
+import heroPoster from "../../assets/home_media/hero-poster.webp";
 
 function Hero() {
   return (
@@ -12,6 +13,7 @@ function Hero() {
         muted
         loop
         playsInline
+        poster={heroPoster}
       />
 
       <div className="hero__content">
