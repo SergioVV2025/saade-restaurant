@@ -10,10 +10,13 @@ import {
 } from "../middlewares/validation.js";
 
 import auth from "../middlewares/auth.js";
+
+import optionalAuth from "../middlewares/optionalAuth.js";
 // router.use(auth);
 
 router.post(
   "/reservations",
+  optionalAuth,
   validateReservation,
   controllers.createReservation,
 );
