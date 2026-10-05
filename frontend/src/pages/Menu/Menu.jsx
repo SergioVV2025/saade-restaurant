@@ -2,12 +2,34 @@ import MenuSection from "../../components/MenuSection/MenuSection";
 
 import menuFoodImage from "../../assets/menu_media/menu-food.jpg";
 import menuDrinksImage from "../../assets/menu_media/menu-drinks.jpg";
+import saadeStars from "../../assets/saade-stars.svg";
+import saadePalm from "../../assets/saade-palm.svg";
 
 function Menu() {
   return (
     <main className="menu">
       <header className="menu__header">
-        <p className="menu__eyebrow">Eat & drink</p>
+        <div className="menu__eyebrow-group">
+          <img
+            className="menu__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p className="menu__eyebrow">
+            <span>Eat & drink</span>
+
+            <img
+              className="menu__palm"
+              src={saadePalm}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <span>Silver Lake</span>
+          </p>
+        </div>
 
         <div className="menu__header-grid">
           <h1 className="menu__title">Menu</h1>
@@ -51,7 +73,7 @@ function Menu() {
           <h2 className="menu-food__title">
             Made for
             <br />
-            the table.
+            <span className="menu-food__title-accent">the table.</span>
           </h2>
 
           <div className="menu-food__list">
@@ -116,7 +138,7 @@ function Menu() {
           <h2 className="menu-drinks__title">
             Something
             <br />
-            to drink.
+            <span className="menu-drinks__title-accent">to drink.</span>
           </h2>
 
           <div className="menu-drinks__list">
@@ -165,7 +187,7 @@ function Menu() {
           <h2 className="menu-late__title">
             Stay for
             <br />
-            one more.
+            <span className="menu-late__title-accent">one more.</span>
           </h2>
         </div>
 

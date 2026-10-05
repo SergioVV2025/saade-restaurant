@@ -3,6 +3,7 @@ import { reservationTimes } from "../../utils/reservationConstants";
 import { validateReservationUpdate } from "../../utils/validation";
 import Popup from "../../components/Popup/Popup";
 import "../../blocks/myReservations.css";
+import saadeStars from "../../assets/saade-stars.svg";
 
 import {
   getReservations,
@@ -169,7 +170,16 @@ function MyReservations() {
   return (
     <main className="my-reservations">
       <section className="my-reservations__intro">
-        <p className="my-reservations__eyebrow">YOUR TABLES</p>
+        <div className="my-reservations__eyebrow-group">
+          <img
+            className="my-reservations__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p className="my-reservations__eyebrow">YOUR TABLES</p>
+        </div>
 
         <h1 className="my-reservations__title">
           Mis

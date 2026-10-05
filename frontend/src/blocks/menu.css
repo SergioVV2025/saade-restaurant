@@ -17,6 +17,34 @@
   text-transform: uppercase;
 }
 
+.menu__eyebrow-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.menu__stars {
+  width: 72px;
+  height: auto;
+}
+
+.menu__eyebrow-group .menu__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin: 0;
+}
+
+.menu__palm {
+  width: 12px;
+  height: 18px;
+  object-fit: contain;
+}
+
 .menu__header-grid {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
@@ -69,6 +97,11 @@
 
 .menu-section:nth-child(2) {
   background-color: var(--color-acid);
+}
+
+.menu-section:nth-child(2) .menu-section__title {
+  font-family: "JJ Amos", serif;
+  letter-spacing: 0.015em;
 }
 
 .menu-section:nth-child(3) {
@@ -129,6 +162,12 @@
   font-size: clamp(56px, 7vw, 110px);
   line-height: 0.85;
   letter-spacing: -0.055em;
+}
+
+.menu-food__title-accent {
+  font-family: "JJ Amos", serif;
+  font-size: 0.72em;
+  letter-spacing: 0.015em;
 }
 
 .menu-food__list {
@@ -228,6 +267,12 @@
   letter-spacing: -0.055em;
 }
 
+.menu-drinks__title-accent {
+  font-family: "JJ Amos", serif;
+  font-size: 0.72em;
+  letter-spacing: 0.015em;
+}
+
 .menu-drinks__list {
   display: flex;
   flex-direction: column;
@@ -297,6 +342,12 @@
   font-size: clamp(64px, 8vw, 120px);
   line-height: 0.86;
   letter-spacing: -0.055em;
+}
+
+.menu-late__title-accent {
+  font-family: "JJ Amos", serif;
+  font-size: 0.72em;
+  letter-spacing: 0.015em;
 }
 
 .menu-late__body {

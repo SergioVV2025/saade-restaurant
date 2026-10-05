@@ -1,7 +1,11 @@
+import saadeLogoPink from "../../assets/saade-logo-pink.svg";
+
 function Footer() {
   return (
     <footer className="footer">
-      <p>© 2026 SAADE</p>
+      <img className="footer__logo" src={saadeLogoPink} alt="Saade" />
+
+      <p className="footer__copyright">© 2026 SAADE</p>
     </footer>
   );
 }

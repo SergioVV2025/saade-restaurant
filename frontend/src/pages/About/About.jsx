@@ -1,15 +1,37 @@
 import friendsGroup from "../../assets/about_media/friends-group.jpg";
+import saadeStars from "../../assets/saade-stars.svg";
+import saadePalm from "../../assets/saade-palm.svg";
 
 function About() {
   return (
     <main className="about">
       <section className="about__hero">
-        <p className="about__eyebrow">Silver Lake · Los Angeles</p>
+        <div className="about__eyebrow-group">
+          <img
+            className="about__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p className="about__eyebrow">
+            <span>Silver Lake</span>
+
+            <img
+              className="about__palm"
+              src={saadePalm}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <span>Los Angeles</span>
+          </p>
+        </div>
 
         <h1 className="about__title">
           Your neighborhood
           <br />
-          table.
+          <span className="about__title-accent">table.</span>
         </h1>
 
         <p className="about__intro">

@@ -3,6 +3,7 @@ import { getEvents } from "../../utils/api";
 import EventCard from "../../components/EventCard/EventCard";
 import Preloader from "../../components/Preloader/Preloader";
 import SearchForm from "../../components/SearchForm/SearchForm";
+import saadeStars from "../../assets/saade-stars.svg";
 
 function Explore() {
   const [events, setEvents] = useState([]);
@@ -58,10 +59,28 @@ function Explore() {
 
   return (
     <main className="explore">
-      <h1 className="explore__title">Explore</h1>
-      <p className="explore__subtitle">
-        What&apos;s happening around Los Angeles?
-      </p>
+      <header className="explore__header">
+        <div className="explore__eyebrow-group">
+          <img
+            className="explore__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p className="explore__eyebrow">WHAT&apos;S HAPPENING</p>
+        </div>
+
+        <h1 className="explore__title">
+          Explore
+          <br />
+          <span className="explore__title-accent">Los Angeles.</span>
+        </h1>
+
+        <p className="explore__subtitle">
+          Find something to do before or after your table at Saade.
+        </p>
+      </header>
 
       {isLoading && <Preloader />}
       {/* {true && <Preloader />} */}

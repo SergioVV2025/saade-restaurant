@@ -13,3 +13,19 @@
   font-display: swap;
   src: url("./fonts/Sekuya-Regular.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "JJ Amos";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/JJ_Amos.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./fonts/Montserrat-VariableFont_wght.woff2") format("woff2");
+}

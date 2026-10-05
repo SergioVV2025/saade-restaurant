@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import homeVideo from "../../assets/home_media/pexels_2.mp4";
 import SocialLink from "../../components/SocialLinks/SocialLinks";
+import saadeStars from "../../assets/saade-stars.svg";
+import saadePalm from "../../assets/saade-palm.svg";
 
 function Home() {
   return (
@@ -10,10 +12,34 @@ function Home() {
       <Hero />
 
       <section className="home-intro">
-        <p className="home-intro__eyebrow">Silver Lake · Los Angeles</p>
+        <div className="home-intro__eyebrow-group">
+          <img
+            className="home-intro__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p className="home-intro__eyebrow">
+            <span>Silver Lake</span>
+
+            <img
+              className="home-intro__palm"
+              src={saadePalm}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <span>Los Angeles</span>
+          </p>
+        </div>
 
         <div className="home-intro__grid">
-          <h2 className="home-intro__title">Food made for hanging out.</h2>
+          <h2 className="home-intro__title">
+            Food made for
+            <br />
+            <span className="home-intro__title-accent">hanging out.</span>
+          </h2>
 
           <div className="home-intro__copy">
             <p>Good food, cold drinks, music, and a table worth staying at.</p>
@@ -43,7 +69,7 @@ function Home() {
           <h2 className="home-reservation__title">
             Come hungry.
             <br />
-            Stay awhile.
+            <span className="home-reservation__title-accent">Stay awhile.</span>
           </h2>
 
           <Link className="home-reservation__link" to="/reservation">
@@ -75,7 +101,7 @@ function Home() {
             <p>
               +1 000 000 0000
               <br />
-              hello@saade.com
+              info@santorestaurants.com
             </p>
           </div>
 

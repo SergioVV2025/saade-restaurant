@@ -11,6 +11,7 @@ function EventCard({ event }) {
       )}
 
       <div className="event-card__content">
+        <p className="event-card__eyebrow">AROUND TOWN</p>
         <h2 className="event-card__title">{event.name}</h2>
 
         {date && <p className="event-card__date">{date}</p>}

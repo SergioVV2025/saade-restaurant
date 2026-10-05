@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react"; /* para 390px */
+import { useState } from "react";
+import saadeLogo from "../../assets/saade-logo-pink.svg";
 
 function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,8 +13,8 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
 
   return (
     <header className="header">
-      <Link className="header__logo" to="/">
-        SAADE
+      <Link className="header__logo" to="/" onClick={handleNavClick}>
+        <img className="header__logo-image" src={saadeLogo} alt="Saade" />
       </Link>
       <button
         className="header__menu-button"
@@ -80,7 +81,10 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
             <button
               className="header__logout"
               type="button"
-              onClick={onSignout}
+              onClick={() => {
+                handleNavClick();
+                onSignout();
+              }}
             >
               Cerrar sesión
             </button>
@@ -89,7 +93,10 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           <button
             className="header__login"
             type="button"
-            onClick={onSigninClick}
+            onClick={() => {
+              handleNavClick();
+              onSigninClick();
+            }}
           >
             Iniciar sesión
           </button>

@@ -15,11 +15,45 @@
   letter-spacing: 0.06em;
 }
 
+.about__eyebrow-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.about__stars {
+  width: 72px;
+  height: auto;
+}
+
+.about__eyebrow-group .about__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin: 0;
+}
+
+.about__palm {
+  width: 12px;
+  height: 18px;
+  object-fit: contain;
+}
+
 .about__title {
   margin: 0;
   font-size: clamp(64px, 9vw, 140px);
   line-height: 0.82;
   letter-spacing: -0.06em;
+}
+
+.about__title-accent {
+  font-family: "JJ Amos", serif;
+  font-size: 0.72em;
+  letter-spacing: 0.015em;
 }
 
 .about__intro {
@@ -138,7 +172,7 @@
   }
 
   .about__title {
-    font-size: clamp(48px, 15vw, 64px);
+    font-size: clamp(46px, 13vw, 58px);
     line-height: 0.86;
   }
 

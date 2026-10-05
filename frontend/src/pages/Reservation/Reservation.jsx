@@ -7,6 +7,7 @@ import {
 import Popup from "../../components/Popup/Popup";
 import { createReservation } from "../../utils/reservations.js";
 import { reservationTimes } from "../../utils/reservationConstants";
+import saadeStars from "../../assets/saade-stars.svg";
 
 function Reservation() {
   const [formData, setFormData] = useState({
@@ -139,11 +140,36 @@ function Reservation() {
       })
     : "";
 
+  function formatDateForInput(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = new Date();
+
+  const maxReservationDate = new Date();
+  maxReservationDate.setFullYear(today.getFullYear() + 1);
+
+  const minDate = formatDateForInput(today);
+  const maxDate = formatDateForInput(maxReservationDate);
+
   return (
     <main className="reservation-page">
       <div className="reservation-page__layout">
         <section className="reservation-page__intro">
-          <p className="reservation-page__eyebrow">Come hang</p>
+          <div className="reservation-page__eyebrow-group">
+            <img
+              className="reservation-page__stars"
+              src={saadeStars}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <p className="reservation-page__eyebrow">Come hang</p>
+          </div>
           <h1 className="reservation-page__title">
             Reserve
             <br />
@@ -223,7 +249,8 @@ function Reservation() {
               id="date"
               name="date"
               type="date"
-              min={new Date().toISOString().split("T")[0]}
+              min={minDate}
+              max={maxDate}
               value={formData.date}
               onChange={handleChange}
               required

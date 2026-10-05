@@ -34,6 +34,38 @@ export function validateEmail(value) {
   return "";
 }
 
+export function validateReservationDate(value) {
+  if (!value) {
+    return "La fecha es obligatoria.";
+  }
+
+  const today = new Date();
+
+  const maxReservationDate = new Date();
+  maxReservationDate.setFullYear(today.getFullYear() + 1);
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const minDate = formatDate(today);
+  const maxDate = formatDate(maxReservationDate);
+
+  if (value < minDate) {
+    return "La fecha no puede ser anterior a hoy.";
+  }
+
+  if (value > maxDate) {
+    return "La reserva no puede hacerse con más de un año de anticipación.";
+  }
+
+  return "";
+}
+
 export function validateForm(formData) {
   const today = new Date().toISOString().split("T")[0];
   const errors = {
@@ -48,11 +80,7 @@ export function validateForm(formData) {
 
     phone: formData.phone.trim() ? "" : "El teléfono es obligatorio.",
 
-    date: !formData.date
-      ? "La fecha es obligatoria."
-      : formData.date < today
-        ? "La fecha no puede ser anterior a hoy."
-        : "",
+    date: validateReservationDate(formData.date),
 
     time: !formData.time
       ? "La hora es obligatoria."
@@ -74,11 +102,7 @@ export function validateReservationUpdate({ date, time, guests }) {
   const today = new Date().toISOString().split("T")[0];
 
   const errors = {
-    date: !date
-      ? "La fecha es obligatoria."
-      : date < today
-        ? "La fecha no puede ser anterior a hoy."
-        : "",
+    date: validateReservationDate(date),
 
     time: !time
       ? "La hora es obligatoria."

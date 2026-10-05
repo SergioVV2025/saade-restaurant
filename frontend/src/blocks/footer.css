@@ -1,10 +1,23 @@
 .footer {
-  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 28px 40px;
+
   background-color: var(--color-brown);
   color: var(--color-cream);
 }
 
+.footer__logo {
+  display: block;
+  width: 110px;
+  height: auto;
+}
+
 .footer__copyright {
   margin: 0;
-  font-size: 14px;
+
+  font-size: 13px;
+  letter-spacing: 0.08em;
 }

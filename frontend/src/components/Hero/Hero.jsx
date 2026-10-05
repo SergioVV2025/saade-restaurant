@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import heroVideo from "../../assets/home_media/hero-video.mp4";
 import heroPoster from "../../assets/home_media/hero-poster.webp";
+import saadeStars from "../../assets/saade-stars.svg";
+import saadePalm from "../../assets/saade-palm.svg";
 
 function Hero() {
   return (
@@ -17,12 +19,30 @@ function Hero() {
       />
 
       <div className="hero__content">
-        <p className="hero__eyebrow">Silver Lake · Los Angeles</p>
+        <img
+          className="hero__stars"
+          src={saadeStars}
+          alt=""
+          aria-hidden="true"
+        />
+
+        <p className="hero__eyebrow">
+          <span>Silver Lake</span>
+
+          <img
+            className="hero__palm"
+            src={saadePalm}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <span>Los Angeles</span>
+        </p>
 
         <h1 className="hero__title">
           Eat well.
           <br />
-          Stay awhile.
+          <span className="hero__title-accent">Stay awhile.</span>
         </h1>
 
         <p className="hero__description">

@@ -19,6 +19,20 @@
   letter-spacing: 0.08em;
 }
 
+.my-reservations__eyebrow-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-bottom: 16px;
+}
+
+.my-reservations__stars {
+  width: 72px;
+  height: auto;
+}
+
 .my-reservations__title {
   margin: 0;
 
@@ -200,11 +214,10 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .my-reservations__title {
     font-size: 54px;
     line-height: 0.86;
-    overflow-wrap: anywhere;
   }
 
   .reservation-card {
