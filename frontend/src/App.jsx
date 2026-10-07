@@ -63,8 +63,12 @@ function App() {
       setCurrentUser(userData.user);
       setIsLoggedIn(true);
       closeAllPopups();
+
+      return true;
     } catch (err) {
       setAuthError(err.message);
+
+      return false;
     }
   }
 

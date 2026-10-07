@@ -58,6 +58,17 @@
   outline-offset: 3px;
 }
 
+.auth-popup__input_error {
+  border-color: #b42318;
+}
+
+.auth-popup__field-error {
+  margin: 0;
+
+  font-size: 13px;
+  color: #b42318;
+}
+
 .auth-popup__error {
   margin: -6px 0 0;
 

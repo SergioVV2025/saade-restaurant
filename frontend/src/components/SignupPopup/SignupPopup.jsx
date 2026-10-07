@@ -9,9 +9,119 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  function validateName(value) {
+    if (!value.trim()) {
+      return "El nombre es obligatorio.";
+    }
+
+    if (value.trim().length < 2) {
+      return "El nombre debe tener al menos 2 caracteres.";
+    }
+
+    return "";
+  }
+
+  function validateEmail(value) {
+    if (!value.trim()) {
+      return "El correo electrónico es obligatorio.";
+    }
+
+    if (!/\S+@\S+\.\S+/.test(value)) {
+      return "Introduce un email válido.";
+    }
+
+    return "";
+  }
+
+  function validatePassword(value) {
+    if (!value) {
+      return "La contraseña es obligatoria.";
+    }
+
+    return "";
+  }
+
+  function validateConfirmPassword(value, passwordValue) {
+    if (!value) {
+      return "Confirma tu contraseña.";
+    }
+
+    if (value !== passwordValue) {
+      return "Las contraseñas no coinciden.";
+    }
+
+    return "";
+  }
+
+  function handleNameChange(event) {
+    const value = event.target.value;
+
+    setName(value);
+
+    setFieldErrors((currentErrors) => ({
+      ...currentErrors,
+      name: validateName(value),
+    }));
+  }
+
+  function handleEmailChange(event) {
+    const value = event.target.value;
+
+    setEmail(value);
+
+    setFieldErrors((currentErrors) => ({
+      ...currentErrors,
+      email: validateEmail(value),
+    }));
+  }
+
+  function handlePasswordChange(event) {
+    const value = event.target.value;
+
+    setPassword(value);
+
+    setFieldErrors((currentErrors) => ({
+      ...currentErrors,
+      password: validatePassword(value),
+      confirmPassword: confirmPassword
+        ? validateConfirmPassword(confirmPassword, value)
+        : currentErrors.confirmPassword,
+    }));
+  }
+
+  function handleConfirmPasswordChange(event) {
+    const value = event.target.value;
+
+    setConfirmPassword(value);
+
+    setFieldErrors((currentErrors) => ({
+      ...currentErrors,
+      confirmPassword: validateConfirmPassword(value, password),
+    }));
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const errors = {
+      name: validateName(name),
+      email: validateEmail(email),
+      password: validatePassword(password),
+      confirmPassword: validateConfirmPassword(confirmPassword, password),
+    };
+
+    setFieldErrors(errors);
+
+    if (
+      errors.name ||
+      errors.email ||
+      errors.password ||
+      errors.confirmPassword
+    ) {
+      return;
+    }
 
     const isSuccess = await onSignup(name, email, password, confirmPassword);
 
@@ -23,66 +133,104 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+    setFieldErrors({});
+  }
+
+  function handleClose() {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setFieldErrors({});
+    onClose();
   }
 
   return (
-    <Popup isOpen={isOpen} onClose={onClose}>
+    <Popup isOpen={isOpen} onClose={handleClose}>
       <div className="auth-popup">
         <p className="auth-popup__eyebrow">JOIN THE TABLE</p>
 
         <h2 className="auth-popup__title">Crear cuenta</h2>
 
-        <form className="auth-popup__form" onSubmit={handleSubmit}>
+        <form className="auth-popup__form" onSubmit={handleSubmit} noValidate>
           <label className="auth-popup__field">
             <span className="auth-popup__label">Nombre</span>
 
             <input
-              className="auth-popup__input"
+              className={`auth-popup__input ${
+                fieldErrors.name ? "auth-popup__input_error" : ""
+              }`}
               type="text"
               placeholder="Tu nombre"
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={handleNameChange}
               required
             />
+            {fieldErrors.name && (
+              <span className="auth-popup__field-error">
+                {fieldErrors.name}
+              </span>
+            )}
           </label>
 
           <label className="auth-popup__field">
             <span className="auth-popup__label">Correo electrónico</span>
 
             <input
-              className="auth-popup__input"
+              className={`auth-popup__input ${
+                fieldErrors.email ? "auth-popup__input_error" : ""
+              }`}
               type="email"
               placeholder="tu@email.com"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={handleEmailChange}
               required
             />
+            {fieldErrors.email && (
+              <span className="auth-popup__field-error">
+                {fieldErrors.email}
+              </span>
+            )}
           </label>
 
           <label className="auth-popup__field">
             <span className="auth-popup__label">Contraseña</span>
 
             <input
-              className="auth-popup__input"
+              className={`auth-popup__input ${
+                fieldErrors.password ? "auth-popup__input_error" : ""
+              }`}
               type="password"
               placeholder="••••••••"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={handlePasswordChange}
               required
             />
+            {fieldErrors.password && (
+              <span className="auth-popup__field-error">
+                {fieldErrors.password}
+              </span>
+            )}
           </label>
 
           <label className="auth-popup__field">
             <span className="auth-popup__label">Confirmar contraseña</span>
 
             <input
-              className="auth-popup__input"
+              className={`auth-popup__input ${
+                fieldErrors.confirmPassword ? "auth-popup__input_error" : ""
+              }`}
               type="password"
               placeholder="••••••••"
               value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
+              onChange={handleConfirmPasswordChange}
               required
             />
+            {fieldErrors.confirmPassword && (
+              <span className="auth-popup__field-error">
+                {fieldErrors.confirmPassword}
+              </span>
+            )}
           </label>
 
           {error && <p className="auth-popup__error">{error}</p>}
