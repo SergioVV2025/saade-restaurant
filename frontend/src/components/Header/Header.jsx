@@ -51,6 +51,14 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
         </NavLink>
 
         <NavLink
+          to="/gallery"
+          className={customClassName}
+          onClick={handleNavClick}
+        >
+          Galería
+        </NavLink>
+
+        <NavLink
           to="/reservation"
           className={customClassName}
           onClick={handleNavClick}

@@ -67,7 +67,6 @@ export function validateReservationDate(value) {
 }
 
 export function validateForm(formData) {
-  const today = new Date().toISOString().split("T")[0];
   const errors = {
     name: validateText({
       value: formData.name,
@@ -99,8 +98,6 @@ export function validateForm(formData) {
 }
 
 export function validateReservationUpdate({ date, time, guests }) {
-  const today = new Date().toISOString().split("T")[0];
-
   const errors = {
     date: validateReservationDate(date),
 

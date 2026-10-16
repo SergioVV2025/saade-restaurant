@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Menu from "./pages/Menu/Menu";
 import About from "./pages/About/About";
+import Gallery from "./pages/Gallery/Gallery";
 import Reservation from "./pages/Reservation/Reservation";
 import Explore from "./pages/Explore/Explore";
 
@@ -106,12 +107,6 @@ function App() {
     setAuthError("");
   }
 
-  function handleReservationSignup(email) {
-    setSignupEmail(email);
-    setIsSignupPopupOpen(true);
-    setAuthError("");
-  }
-
   function closeAllPopups() {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
@@ -135,6 +130,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route
           path="/my-reservations"

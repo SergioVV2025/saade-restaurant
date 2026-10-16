@@ -1,0 +1,245 @@
+.gallery {
+  background-color: var(--color-cream);
+  color: var(--color-brown);
+}
+
+/* HERO */
+
+.gallery__hero {
+  min-height: 70vh;
+  padding: 110px 7vw 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gallery__stars {
+  display: block;
+  width: 100px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.gallery__eyebrow {
+  margin: 0 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.gallery__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.gallery__title-main {
+  font-size: clamp(58px, 8vw, 128px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+.gallery__title-accent {
+  margin-left: 12vw;
+  font-family: "JJ Amos", sans-serif;
+  font-size: clamp(70px, 10vw, 150px);
+  line-height: 0.85;
+}
+
+.gallery__intro {
+  max-width: 520px;
+  margin: 42px 0 0 auto;
+  font-family: var(--font-primary);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.4;
+}
+
+/* FEATURE — PANORÁMICA */
+
+.gallery__feature {
+  width: 100%;
+  height: min(72vw, 820px);
+  overflow: hidden;
+}
+
+.gallery__feature-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* MOMENTS — PAREJAS EDITORIALES */
+
+.gallery__moments {
+  padding: 65px 10vw 45px;
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 5vw;
+  align-items: start;
+}
+
+/* Pareja incompleta */
+
+.gallery__moments_single {
+  grid-template-columns: minmax(0, 460px);
+  justify-content: center;
+  padding: 35px 10vw 25px;
+}
+
+/* Fotografías */
+
+.gallery__moment {
+  margin: 0;
+  overflow: hidden;
+}
+
+.gallery__moment_primary {
+  aspect-ratio: 4 / 5;
+}
+
+.gallery__moment_offset {
+  margin-top: 80px;
+  aspect-ratio: 3 / 4;
+}
+
+.gallery__moment-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Alternancia editorial */
+
+.gallery__moments_reverse .gallery__moment_primary {
+  margin-top: 140px;
+}
+
+.gallery__moments_reverse .gallery__moment_offset {
+  margin-top: 0;
+}
+
+.gallery__moments_reverse .gallery__moment:only-child {
+  margin-top: 0;
+}
+
+.gallery__landscape {
+  width: 100%;
+  padding: 55px 14vw;
+  box-sizing: border-box;
+}
+
+.gallery__landscape-image {
+  display: block;
+  width: 100%;
+  height: 65vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gallery__landscape-pair {
+  padding: 30px 12vw;
+  display: grid;
+  grid-template-columns: 1.3fr 0.85fr;
+  gap: 4vw;
+  align-items: start;
+}
+
+.gallery__landscape-item {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.gallery__landscape-item_primary {
+  aspect-ratio: 3 / 2;
+}
+
+.gallery__landscape-item_secondary {
+  margin-top: 65px;
+  aspect-ratio: 4 / 3;
+}
+
+.gallery__landscape-pair-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RESPONSIVE — HERO */
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+  .gallery__landscape-pair {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 36px 7vw;
+  }
+
+  .gallery__landscape-item_secondary {
+    margin-top: 35px;
+  }
+
+  .gallery__moment_offset {
+    margin-top: 45px;
+  }
+
+  .gallery__moments_reverse .gallery__moment_primary {
+    margin-top: 45px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gallery__hero {
+    min-height: auto;
+    padding: 72px 24px 64px;
+  }
+
+  .gallery__title-main {
+    font-size: clamp(48px, 15vw, 68px);
+  }
+
+  .gallery__title-accent {
+    margin-left: 0;
+    font-size: clamp(58px, 18vw, 82px);
+  }
+
+  .gallery__intro {
+    margin: 32px 0 0;
+    font-size: 18px;
+  }
+
+  .gallery__moments,
+  .gallery__landscape-pair {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 24px;
+  }
+
+  .gallery__moment_offset,
+  .gallery__moments_reverse .gallery__moment_primary,
+  .gallery__landscape-item_secondary {
+    margin-top: 0;
+  }
+
+  .gallery__moments_single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery__landscape {
+    padding: 24px;
+  }
+
+  .gallery__landscape-image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+
+  .gallery__feature {
+    height: 55vh;
+  }
+}
