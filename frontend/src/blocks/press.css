@@ -1,0 +1,149 @@
+.press {
+  background-color: var(--color-cream);
+  color: var(--color-brown);
+}
+
+/* HERO */
+
+.press__hero {
+  min-height: 70vh;
+  padding: 110px 7vw 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.press__stars {
+  display: block;
+  width: 100px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.press__eyebrow {
+  margin: 0 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.press__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.press__title-main {
+  font-size: clamp(58px, 8vw, 128px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+.press__title-accent {
+  margin-left: 12vw;
+  font-family: "JJ Amos", sans-serif;
+  font-size: clamp(70px, 10vw, 150px);
+  line-height: 0.85;
+}
+
+.press__intro {
+  max-width: 520px;
+  margin: 42px 0 0 auto;
+  font-family: var(--font-primary);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.4;
+}
+
+/* PRESS — ARTICLES */
+
+.press__articles {
+  padding: 80px 7vw 120px;
+}
+
+.press__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 70px 5vw;
+}
+
+.press__article {
+  padding: 32px 0;
+  border-top: 1px solid var(--color-brown);
+}
+
+.press__publication {
+  margin: 0 0 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.press__article-title {
+  margin: 0 0 36px;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.press__article-link {
+  color: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+}
+
+.press__article-link:hover {
+  opacity: 0.65;
+}
+
+/* EMPTY STATE */
+
+.press__empty {
+  margin: 0;
+  padding: 60px 0;
+  border-top: 1px solid var(--color-brown);
+  font-family: "JJ Amos", sans-serif;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.2;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 600px) {
+  .press__hero {
+    min-height: auto;
+    padding: 72px 24px 64px;
+  }
+
+  .press__title-main {
+    font-size: clamp(48px, 15vw, 68px);
+  }
+
+  .press__title-accent {
+    margin-left: 0;
+    font-size: clamp(58px, 18vw, 82px);
+  }
+
+  .press__intro {
+    margin: 32px 0 0;
+    font-size: 18px;
+  }
+
+  .press__articles {
+    padding: 48px 24px 80px;
+  }
+
+  .press__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .press__empty {
+    padding: 40px 0;
+  }
+}

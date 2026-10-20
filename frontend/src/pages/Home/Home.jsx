@@ -80,11 +80,23 @@ function Home() {
         <div className="home-reservation__info">
           <div className="home-reservation__group">
             <p className="home-reservation__label">Visit</p>
-            <p>
-              Sunset Boulevard
+
+            <address className="home-reservation__address">
+              3828 West Sunset Boulevard
               <br />
-              Silver Lake · Los Angeles
-            </p>
+              Suite 140
+              <br />
+              Los Angeles, CA 90026
+            </address>
+
+            <a
+              className="home-reservation__directions"
+              href="https://www.google.com/maps/search/?api=1&query=3828+West+Sunset+Boulevard+Suite+140+Los+Angeles+CA+90026"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get directions →
+            </a>
           </div>
 
           <div className="home-reservation__group">
@@ -114,6 +126,16 @@ function Home() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="home-location" aria-label="Saade location">
+        <iframe
+          className="home-location__map"
+          title="Saade Restaurant location"
+          src="https://www.google.com/maps?q=3828+West+Sunset+Boulevard+Suite+140+Los+Angeles+CA+90026&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
       </section>
     </main>
   );

@@ -16,6 +16,7 @@ import SignupPopup from "./components/SignupPopup/SignupPopup";
 import { signin, signup, getCurrentUser } from "./utils/auth";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import MyReservations from "./pages/MyReservations/MyReservations";
+import Press from "./pages/Press/Press";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -131,6 +132,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/press" element={<Press />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route
           path="/my-reservations"

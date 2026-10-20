@@ -197,6 +197,42 @@ body {
   gap: 20px;
 }
 
+.home-reservation__address {
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.home-reservation__directions {
+  display: inline-block;
+  margin-top: 16px;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.home-reservation__directions:hover {
+  opacity: 0.65;
+}
+
+/* LOCATION */
+
+.home-location {
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+}
+
+.home-location__map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 @media screen and (max-width: 800px) {
   .home-intro,
   .home-reservation {
@@ -222,5 +258,9 @@ body {
 
   .home-media__video {
     height: 55vh;
+  }
+
+  .home-location {
+    height: 320px;
   }
 }
