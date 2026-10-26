@@ -1,182 +1,211 @@
-import saadeStars from "../../assets/saade-stars.svg";
+import { useEffect, useState, useRef } from "react";
 import galleryImages from "../../utils/galleryData";
+import saadeStars from "../../assets/saade-stars.svg";
+import saadePalm from "../../assets/saade-palm.svg";
 
 function Gallery() {
-  const galleryBlocks = [];
-  const featuredImage = galleryImages.find((image) => image.layout === "wide");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  for (let i = 0; i < galleryImages.length; i++) {
-    const image = galleryImages[i];
+  const touchStartX = useRef(null);
 
-    if (image.layout === "wide") {
-      continue;
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0].clientX;
+    const distance = touchStartX.current - touchEndX;
+
+    touchStartX.current = null;
+
+    if (Math.abs(distance) < 50) return;
+
+    if (distance > 0) {
+      showNextImage();
+    } else {
+      showPreviousImage();
     }
+  };
 
-    if (image.layout === "landscape") {
-      const nextImage = galleryImages[i + 1];
+  const selectedImage =
+    selectedIndex !== null ? galleryImages[selectedIndex] : null;
 
-      if (nextImage?.layout === "landscape") {
-        galleryBlocks.push({
-          type: "landscape-pair",
-          images: [image, nextImage],
-        });
+  const showPreviousImage = () => {
+    setSelectedIndex(
+      (currentIndex) =>
+        (currentIndex - 1 + galleryImages.length) % galleryImages.length,
+    );
+  };
 
-        i++;
-      } else {
-        galleryBlocks.push({
-          type: "landscape",
-          images: [image],
-        });
+  const showNextImage = () => {
+    setSelectedIndex(
+      (currentIndex) => (currentIndex + 1) % galleryImages.length,
+    );
+  };
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSelectedIndex(null);
       }
 
-      continue;
-    }
-
-    if (image.layout === "portrait") {
-      const nextImage = galleryImages[i + 1];
-
-      if (nextImage?.layout === "portrait") {
-        galleryBlocks.push({
-          type: "pair",
-          images: [image, nextImage],
-        });
-
-        i++;
-      } else {
-        galleryBlocks.push({
-          type: "single",
-          images: [image],
-        });
+      if (event.key === "ArrowLeft") {
+        setSelectedIndex(
+          (currentIndex) =>
+            (currentIndex - 1 + galleryImages.length) % galleryImages.length,
+        );
       }
-    }
-  }
+
+      if (event.key === "ArrowRight") {
+        setSelectedIndex(
+          (currentIndex) => (currentIndex + 1) % galleryImages.length,
+        );
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedIndex]);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selectedIndex]);
 
   return (
     <main className="gallery">
-      <section className="gallery__hero">
-        <img
-          className="gallery__stars"
-          src={saadeStars}
-          alt=""
-          aria-hidden="true"
-        />
+      <header className="gallery__header">
+        <div className="gallery__eyebrow-group">
+          <img
+            className="gallery__stars"
+            src={saadeStars}
+            alt=""
+            aria-hidden="true"
+          />
 
-        <p className="gallery__eyebrow">AROUND THE TABLE</p>
+          <p className="gallery__eyebrow">
+            <span>Silver Lake</span>
+
+            <img
+              className="gallery__palm"
+              src={saadePalm}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <span>Los Angeles</span>
+          </p>
+        </div>
 
         <h1 className="gallery__title">
-          <span className="gallery__title-main">Eat. Drink.</span>
-          <span className="gallery__title-accent">Stay awhile.</span>
+          Life at
+          <br />
+          <span className="gallery__title-accent">Saade.</span>
         </h1>
 
         <p className="gallery__intro">
-          Food, friends, late nights and everything in between.
+          Good food, familiar faces, shared tables, and nights worth
+          remembering.
         </p>
-      </section>
-      {featuredImage && (
-        <section className="gallery__feature">
-          <img
-            className="gallery__feature-image"
-            src={featuredImage.src}
-            alt={featuredImage.alt}
-          />
-        </section>
-      )}
-      {galleryBlocks.map((block, blockIndex) => {
-        const image = block.images[0];
+      </header>
+      <section className="gallery-grid">
+        {galleryImages.map((image, index) => (
+          <button
+            className="gallery-grid__item"
+            type="button"
+            key={image.id}
+            onClick={() => setSelectedIndex(index)}
+          >
+            <img
+              className="gallery-grid__image"
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+            />
+          </button>
+        ))}
+        {selectedImage && (
+          <div
+            className="gallery-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo viewer"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className="gallery-lightbox__media">
+              <button
+                className="gallery-lightbox__close"
+                type="button"
+                onClick={() => setSelectedIndex(null)}
+                aria-label="Close photo viewer"
+              >
+                ✕
+              </button>
 
-        if (block.type === "landscape-pair") {
-          return (
-            <section className="gallery__landscape-pair" key={image.id}>
-              {block.images.map((pairImage, index) => (
-                <figure
-                  className={`gallery__landscape-item ${
-                    index === 0
-                      ? "gallery__landscape-item_primary"
-                      : "gallery__landscape-item_secondary"
-                  }`}
-                  key={pairImage.id}
-                >
-                  <img
-                    className="gallery__landscape-pair-image"
-                    src={pairImage.src}
-                    alt={pairImage.alt}
-                    loading="lazy"
-                  />
-                </figure>
-              ))}
-            </section>
-          );
-        }
-
-        if (block.type === "landscape") {
-          return (
-            <section className="gallery__landscape" key={image.id}>
               <img
-                className="gallery__landscape-image"
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
+                className="gallery-lightbox__image"
+                src={selectedImage.src}
+                alt={selectedImage.alt}
               />
-            </section>
-          );
-        }
-
-        if (block.type === "single") {
-          return (
-            <section
-              className="gallery__moments gallery__moments_single"
-              key={image.id}
+            </div>
+            <button
+              className="gallery-lightbox__arrow gallery-lightbox__arrow_prev"
+              type="button"
+              onClick={showPreviousImage}
+              aria-label="Previous photo"
             >
-              <figure className="gallery__moment gallery__moment_primary">
-                <img
-                  className="gallery__moment-image"
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                />
-              </figure>
-            </section>
-          );
-        }
-
-        if (block.type === "pair") {
-          return (
-            <section
-              className={`gallery__moments ${
-                galleryBlocks
-                  .slice(0, blockIndex)
-                  .filter((previousBlock) => previousBlock.type === "pair")
-                  .length %
-                  2 !==
-                0
-                  ? "gallery__moments_reverse"
-                  : ""
-              }`}
-              key={image.id}
+              ‹
+            </button>
+            <button
+              className="gallery-lightbox__arrow gallery-lightbox__arrow_next"
+              type="button"
+              onClick={showNextImage}
+              aria-label="Next photo"
             >
-              {block.images.map((pairImage, index) => (
-                <figure
-                  className={`gallery__moment ${
-                    index === 0
-                      ? "gallery__moment_primary"
-                      : "gallery__moment_offset"
-                  }`}
-                  key={pairImage.id}
-                >
-                  <img
-                    className="gallery__moment-image"
-                    src={pairImage.src}
-                    alt={pairImage.alt}
-                    loading="lazy"
-                  />
-                </figure>
-              ))}
-            </section>
-          );
-        }
+              ›
+            </button>
 
-        return null;
-      })}
+            <div className="gallery-lightbox__controls">
+              <button
+                className="gallery-lightbox__control"
+                type="button"
+                onClick={showPreviousImage}
+                aria-label="Previous photo"
+              >
+                ‹
+              </button>
+
+              <p className="gallery-lightbox__counter">
+                {selectedIndex + 1} / {galleryImages.length}
+              </p>
+
+              <button
+                className="gallery-lightbox__control"
+                type="button"
+                onClick={showNextImage}
+                aria-label="Next photo"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
     </main>
   );
 }

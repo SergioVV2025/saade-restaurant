@@ -18,7 +18,7 @@ function SearchForm({ onSearch }) {
       <input
         className="search-form__input"
         type="text"
-        placeholder="Search events in Los Angeles"
+        placeholder="Search concerts, sports, and live events"
         value={keyword}
         onChange={(evt) => setKeyword(evt.target.value)}
         required

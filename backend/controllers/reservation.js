@@ -18,6 +18,7 @@ const createReservation = async (req, res, next) => {
       guests,
       ...(req.user?._id && { owner: req.user._id }),
     });
+
     res.status(201).json({
       name: newReservation.name,
       email: newReservation.email,
@@ -28,7 +29,7 @@ const createReservation = async (req, res, next) => {
     });
   } catch (err) {
     if (err.name === "ValidationError") {
-      return next(new BadRequestError("Datos de reserva inválidos."));
+      return next(new BadRequestError("Invalid reservation information."));
     }
 
     next(err);
@@ -38,6 +39,7 @@ const createReservation = async (req, res, next) => {
 const getReservations = async (req, res, next) => {
   try {
     const reservations = await Reservation.find({ owner: req.user._id });
+
     res.status(200).json(reservations);
   } catch (err) {
     next(err);
@@ -51,21 +53,23 @@ const deleteReservation = async (req, res, next) => {
     ).orFail();
 
     if (String(reservation.owner) !== String(req.user._id)) {
-      throw new ForbiddenError("No tienes permiso para cancelar esta reserva.");
+      throw new ForbiddenError(
+        "You do not have permission to cancel this reservation.",
+      );
     }
 
     await Reservation.findByIdAndDelete(req.params.reservationId).orFail();
 
     return res.status(200).json({
-      message: "Reserva cancelada correctamente.",
+      message: "Reservation canceled successfully.",
     });
   } catch (err) {
     if (err.name === "CastError") {
-      return next(new BadRequestError("ID de reserva inválido."));
+      return next(new BadRequestError("Invalid reservation ID."));
     }
 
     if (err.name === "DocumentNotFoundError") {
-      return next(new NotFoundError("Reserva no encontrada."));
+      return next(new NotFoundError("Reservation not found."));
     }
 
     next(err);
@@ -80,7 +84,7 @@ const updateReservation = async (req, res, next) => {
 
     if (String(reservation.owner) !== String(req.user._id)) {
       throw new ForbiddenError(
-        "No tienes permiso para actualizar esta reserva.",
+        "You do not have permission to update this reservation.",
       );
     }
 
@@ -102,15 +106,15 @@ const updateReservation = async (req, res, next) => {
     return res.status(200).json(updatedReservation);
   } catch (err) {
     if (err.name === "CastError") {
-      return next(new BadRequestError("ID de reserva inválido."));
+      return next(new BadRequestError("Invalid reservation ID."));
     }
 
     if (err.name === "ValidationError") {
-      return next(new BadRequestError("Datos de reserva inválidos."));
+      return next(new BadRequestError("Invalid reservation information."));
     }
 
     if (err.name === "DocumentNotFoundError") {
-      return next(new NotFoundError("Reserva no encontrada."));
+      return next(new NotFoundError("Reservation not found."));
     }
 
     next(err);

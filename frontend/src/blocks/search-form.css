@@ -29,6 +29,7 @@
 }
 
 .search-form__button {
+  box-sizing: border-box;
   padding: 16px 30px;
   border: 2px solid var(--color-brown);
   border-left: 0;

@@ -13,11 +13,11 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
 
   function validateName(value) {
     if (!value.trim()) {
-      return "El nombre es obligatorio.";
+      return "Name is required.";
     }
 
     if (value.trim().length < 2) {
-      return "El nombre debe tener al menos 2 caracteres.";
+      return "Name must be at least 2 characters long.";
     }
 
     return "";
@@ -25,11 +25,11 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
 
   function validateEmail(value) {
     if (!value.trim()) {
-      return "El correo electrónico es obligatorio.";
+      return "Email is required.";
     }
 
     if (!/\S+@\S+\.\S+/.test(value)) {
-      return "Introduce un email válido.";
+      return "Please enter a valid email address.";
     }
 
     return "";
@@ -37,7 +37,7 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
 
   function validatePassword(value) {
     if (!value) {
-      return "La contraseña es obligatoria.";
+      return "Password is required.";
     }
 
     return "";
@@ -45,11 +45,11 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
 
   function validateConfirmPassword(value, passwordValue) {
     if (!value) {
-      return "Confirma tu contraseña.";
+      return "Please confirm your password.";
     }
 
     if (value !== passwordValue) {
-      return "Las contraseñas no coinciden.";
+      return "Passwords do not match.";
     }
 
     return "";
@@ -150,18 +150,18 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
       <div className="auth-popup">
         <p className="auth-popup__eyebrow">JOIN THE TABLE</p>
 
-        <h2 className="auth-popup__title">Crear cuenta</h2>
+        <h2 className="auth-popup__title">Sign Up</h2>
 
         <form className="auth-popup__form" onSubmit={handleSubmit} noValidate>
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Nombre</span>
+            <span className="auth-popup__label">Name</span>
 
             <input
               className={`auth-popup__input ${
                 fieldErrors.name ? "auth-popup__input_error" : ""
               }`}
               type="text"
-              placeholder="Tu nombre"
+              placeholder="Your name"
               value={name}
               onChange={handleNameChange}
               required
@@ -174,14 +174,14 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
           </label>
 
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Correo electrónico</span>
+            <span className="auth-popup__label">Email</span>
 
             <input
               className={`auth-popup__input ${
                 fieldErrors.email ? "auth-popup__input_error" : ""
               }`}
               type="email"
-              placeholder="tu@email.com"
+              placeholder="you@example.com"
               value={email}
               onChange={handleEmailChange}
               required
@@ -194,7 +194,7 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
           </label>
 
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Contraseña</span>
+            <span className="auth-popup__label">Password</span>
 
             <input
               className={`auth-popup__input ${
@@ -214,7 +214,7 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
           </label>
 
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Confirmar contraseña</span>
+            <span className="auth-popup__label">Confirm Password</span>
 
             <input
               className={`auth-popup__input ${
@@ -236,7 +236,7 @@ function SignupPopup({ isOpen, onClose, onSignup, error }) {
           {error && <p className="auth-popup__error">{error}</p>}
 
           <button className="auth-popup__submit" type="submit">
-            Registrarme
+            Create Account
           </button>
         </form>
       </div>

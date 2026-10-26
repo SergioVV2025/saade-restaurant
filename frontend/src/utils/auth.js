@@ -15,7 +15,7 @@ const signin = async (email, password) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Error al iniciar sesión.");
+    throw new Error(data.message || "Unable to sign in. Please try again.");
   }
 
   return data;
@@ -38,7 +38,9 @@ const signup = async (name, email, password, confirmPassword) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Error al registrar usuario.");
+    throw new Error(
+      data.message || "Unable to create your account. Please try again.",
+    );
   }
 
   return data;
@@ -52,14 +54,10 @@ const getCurrentUser = async (token) => {
     },
   });
 
-  console.log(`${BASE_URL}/users/me`);
-
   const data = await response.json();
 
-  console.log(data);
-
   if (!response.ok) {
-    throw new Error(data.message || "Error al obtener el usuario.");
+    throw new Error(data.message || "Unable to retrieve user information.");
   }
 
   return data;

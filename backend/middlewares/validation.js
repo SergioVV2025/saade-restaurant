@@ -27,26 +27,75 @@ const reservationTimes = [
   "23:00",
 ];
 
+const validateReservationDate = (date) => {
+  if (typeof date !== "string") {
+    return "Invalid reservation date.";
+  }
+
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (!datePattern.test(date)) {
+    return "Invalid reservation date.";
+  }
+
+  const parsedDate = new Date(`${date}T00:00:00Z`);
+
+  if (
+    Number.isNaN(parsedDate.getTime()) ||
+    parsedDate.toISOString().slice(0, 10) !== date
+  ) {
+    return "Invalid reservation date.";
+  }
+
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+    .formatToParts(new Date())
+    .reduce((parts, part) => {
+      parts[part.type] = part.value;
+      return parts;
+    }, {});
+
+  const minDate = `${today.year}-${today.month}-${today.day}`;
+
+  const maxDateObject = new Date(`${minDate}T00:00:00Z`);
+
+  maxDateObject.setUTCFullYear(maxDateObject.getUTCFullYear() + 1);
+
+  const maxDate = maxDateObject.toISOString().slice(0, 10);
+
+  if (date < minDate) {
+    return "Reservation date cannot be in the past.";
+  }
+
+  if (date > maxDate) {
+    return "Reservations cannot be made more than one year in advance.";
+  }
+
+  return "";
+};
+
 const validateSignup = (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body;
 
   if (!name || !email || !password || !confirmPassword) {
-    return res
-      .status(400)
-      .send({ message: "Todos los campos son obligatorios!" });
+    return res.status(400).send({ message: "All fields are required." });
   }
 
   if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: "Correo electrónico inválido!" });
+    return res.status(400).send({ message: "Invalid email address." });
   }
 
   if (password !== confirmPassword) {
-    return res.status(400).send({ message: "Las contraseñas no coinciden!" });
+    return res.status(400).send({ message: "Passwords do not match." });
   }
 
   if (!validator.isLength(name, { min: 2, max: 30 })) {
     return res.status(400).send({
-      message: "El nombre debe tener entre 2 y 30 caracteres.",
+      message: "Name must be between 2 and 30 characters.",
     });
   }
 
@@ -57,24 +106,21 @@ const validateSignin = (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res
-      .status(400)
-      .send({ message: "Todos los campos son obligatorios!" });
+    return res.status(400).send({ message: "All fields are required." });
   }
 
   if (!validator.isEmail(email)) {
-    return res.status(400).send({ message: "Correo electrónico inválido!" });
+    return res.status(400).send({ message: "Invalid email address." });
   }
 
   next();
 };
 
 function validateReservationId(req, res, next) {
-  // const reservationId = req.params.reservationId;
   const { reservationId } = req.params;
 
   if (!mongoose.isValidObjectId(reservationId)) {
-    return res.status(400).send({ message: "ID de reserva inválido!" });
+    return res.status(400).send({ message: "Invalid reservation ID." });
   }
 
   next();
@@ -82,35 +128,36 @@ function validateReservationId(req, res, next) {
 
 const validateReservation = (req, res, next) => {
   const { name, email, phone, date, time, guests } = req.body;
-  const today = new Date().toISOString().split("T")[0];
 
   if (!name || !email || !phone || !date || !time || guests === undefined) {
     return res.status(400).send({
-      message: "Todos los campos de la reserva son obligatorios!",
+      message: "All reservation fields are required.",
     });
   }
 
   if (!validator.isLength(name, { min: 2, max: 40 })) {
     return res.status(400).send({
-      message: "El nombre debe tener entre 2 y 40 caracteres.",
+      message: "Name must be between 2 and 40 characters.",
     });
   }
 
   if (!validator.isEmail(email)) {
     return res.status(400).send({
-      message: "Correo electrónico inválido!",
+      message: "Invalid email address.",
     });
   }
 
-  if (date < today) {
+  const dateError = validateReservationDate(date);
+
+  if (dateError) {
     return res.status(400).send({
-      message: "La fecha no puede ser anterior a hoy.",
+      message: dateError,
     });
   }
 
   if (!reservationTimes.includes(time)) {
     return res.status(400).send({
-      message: "El horario seleccionado no es válido.",
+      message: "Invalid reservation time.",
     });
   }
 
@@ -122,7 +169,7 @@ const validateReservation = (req, res, next) => {
     guestsNumber > 20
   ) {
     return res.status(400).send({
-      message: "El número de personas debe estar entre 1 y 20.",
+      message: "Number of guests must be between 1 and 20.",
     });
   }
 
@@ -131,7 +178,6 @@ const validateReservation = (req, res, next) => {
 
 const validateReservationUpdate = (req, res, next) => {
   const { name, email, date, time, guests } = req.body;
-  const today = new Date().toISOString().split("T")[0];
 
   if (name !== undefined && !validator.isLength(name, { min: 2, max: 40 })) {
     return res.status(400).send({
@@ -146,9 +192,11 @@ const validateReservationUpdate = (req, res, next) => {
   }
 
   if (date !== undefined) {
-    if (date < today) {
+    const dateError = validateReservationDate(date);
+
+    if (dateError) {
       return res.status(400).send({
-        message: "La fecha no puede ser anterior a hoy.",
+        message: dateError,
       });
     }
   }

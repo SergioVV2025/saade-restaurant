@@ -4,15 +4,15 @@ export function validateText({ value, fieldName, minLength, maxLength }) {
   const trimmedValue = value.trim();
 
   if (!trimmedValue) {
-    return `${fieldName} es obligatorio.`;
+    return `${fieldName} is required.`;
   }
 
   if (trimmedValue.length < minLength) {
-    return `${fieldName} debe tener al menos ${minLength} caracteres.`;
+    return `${fieldName} must be at least ${minLength} characters long.`;
   }
 
   if (trimmedValue.length > maxLength) {
-    return `${fieldName} no puede tener más de ${maxLength} caracteres.`;
+    return `${fieldName} cannot exceed ${maxLength} characters.`;
   }
 
   return "";
@@ -22,13 +22,13 @@ export function validateEmail(value) {
   const trimmedValue = value.trim();
 
   if (!trimmedValue) {
-    return "El email es obligatorio.";
+    return "Email is required.";
   }
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailPattern.test(trimmedValue)) {
-    return "Introduce un email válido.";
+    return "Please enter a valid email address.";
   }
 
   return "";
@@ -36,7 +36,7 @@ export function validateEmail(value) {
 
 export function validateReservationDate(value) {
   if (!value) {
-    return "La fecha es obligatoria.";
+    return "Date is required.";
   }
 
   const today = new Date();
@@ -56,11 +56,11 @@ export function validateReservationDate(value) {
   const maxDate = formatDate(maxReservationDate);
 
   if (value < minDate) {
-    return "La fecha no puede ser anterior a hoy.";
+    return "Date cannot be in the past.";
   }
 
   if (value > maxDate) {
-    return "La reserva no puede hacerse con más de un año de anticipación.";
+    return "Reservations cannot be made more than one year in advance.";
   }
 
   return "";
@@ -70,27 +70,27 @@ export function validateForm(formData) {
   const errors = {
     name: validateText({
       value: formData.name,
-      fieldName: "Nombre",
+      fieldName: "Name",
       minLength: 2,
       maxLength: 40,
     }),
 
     email: validateEmail(formData.email),
 
-    phone: formData.phone.trim() ? "" : "El teléfono es obligatorio.",
+    phone: formData.phone.trim() ? "" : "Phone number is required.",
 
     date: validateReservationDate(formData.date),
 
     time: !formData.time
-      ? "La hora es obligatoria."
+      ? "Time is required."
       : !reservationTimes.includes(formData.time)
-        ? "Selecciona un horario válido."
+        ? "Please select a valid time."
         : "",
 
     guests: !formData.guests
-      ? "Indica el número de personas."
+      ? "Please enter the number of guests."
       : Number(formData.guests) < 1 || Number(formData.guests) > 20
-        ? "El número de personas debe estar entre 1 y 20."
+        ? "The number of guests must be between 1 and 20."
         : "",
   };
 
@@ -102,14 +102,14 @@ export function validateReservationUpdate({ date, time, guests }) {
     date: validateReservationDate(date),
 
     time: !time
-      ? "La hora es obligatoria."
+      ? "Time is required."
       : !reservationTimes.includes(time)
-        ? "Selecciona un horario válido."
+        ? "Please select a valid time."
         : "",
 
     guests:
       Number(guests) < 1 || Number(guests) > 20
-        ? "El número de personas debe estar entre 1 y 20."
+        ? "The number of guests must be between 1 and 20."
         : "",
   };
 

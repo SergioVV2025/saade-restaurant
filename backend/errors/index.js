@@ -1,33 +1,33 @@
 class BadRequestError extends Error {
-  constructor(message = "Solicitud incorrecta.") {
+  constructor(message = "Invalid request.") {
     super(message);
     this.statusCode = 400;
   }
 }
 
 class UnauthorizedError extends Error {
-  constructor(message = "Error de autorización.") {
+  constructor(message = "Authentication required.") {
     super(message);
     this.statusCode = 401;
   }
 }
 
 class ForbiddenError extends Error {
-  constructor(message = "Acceso prohibido.") {
+  constructor(message = "Access denied.") {
     super(message);
     this.statusCode = 403;
   }
 }
 
 class NotFoundError extends Error {
-  constructor(message = "Recurso no encontrado.") {
+  constructor(message = "Resource not found.") {
     super(message);
     this.statusCode = 404;
   }
 }
 
 class ConflictError extends Error {
-  constructor(message = "Conflicto con los datos existentes.") {
+  constructor(message = "The requested action conflicts with existing data.") {
     super(message);
     this.statusCode = 409;
   }

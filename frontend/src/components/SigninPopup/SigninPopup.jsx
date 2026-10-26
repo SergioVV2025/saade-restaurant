@@ -11,11 +11,11 @@ function SigninPopup({ isOpen, onClose, onSignin, onSignupClick, error }) {
 
   function validateEmail(value) {
     if (!value.trim()) {
-      return "El correo electrónico es obligatorio.";
+      return "Email is required.";
     }
 
     if (!/\S+@\S+\.\S+/.test(value)) {
-      return "Introduce un email válido.";
+      return "Please enter a valid email address.";
     }
 
     return "";
@@ -23,7 +23,7 @@ function SigninPopup({ isOpen, onClose, onSignin, onSignupClick, error }) {
 
   function validatePassword(value) {
     if (!value) {
-      return "La contraseña es obligatoria.";
+      return "Password is required.";
     }
 
     return "";
@@ -95,18 +95,18 @@ function SigninPopup({ isOpen, onClose, onSignin, onSignupClick, error }) {
       <div className="auth-popup">
         <p className="auth-popup__eyebrow">WELCOME BACK</p>
 
-        <h2 className="auth-popup__title">Iniciar sesión</h2>
+        <h2 className="auth-popup__title">Sign In</h2>
 
         <form className="auth-popup__form" onSubmit={handleSubmit} noValidate>
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Correo electrónico</span>
+            <span className="auth-popup__label">Email</span>
 
             <input
               className={`auth-popup__input ${
                 fieldErrors.email ? "auth-popup__input_error" : ""
               }`}
               type="email"
-              placeholder="tu@email.com"
+              placeholder="you@example.com"
               value={email}
               onChange={handleEmailChange}
               required
@@ -119,7 +119,7 @@ function SigninPopup({ isOpen, onClose, onSignin, onSignupClick, error }) {
           </label>
 
           <label className="auth-popup__field">
-            <span className="auth-popup__label">Contraseña</span>
+            <span className="auth-popup__label">Password</span>
 
             <input
               className={`auth-popup__input ${
@@ -141,17 +141,17 @@ function SigninPopup({ isOpen, onClose, onSignin, onSignupClick, error }) {
           {error && <p className="auth-popup__error">{error}</p>}
 
           <button className="auth-popup__submit" type="submit">
-            Iniciar sesión
+            Sign In
           </button>
 
           <p className="auth-popup__switch">
-            ¿No tienes cuenta?
+            Don&apos;t have an account?{" "}
             <button
               className="auth-popup__switch-button"
               type="button"
               onClick={handleSignupClick}
             >
-              Regístrate
+              Sign Up
             </button>
           </p>
         </form>

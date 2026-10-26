@@ -1,0 +1,145 @@
+/* MENU ITEM */
+
+.menu-item {
+  border-bottom: 1px solid currentColor;
+  padding: 20px 0;
+}
+
+.menu-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.menu-item__details {
+  min-width: 0;
+}
+
+.menu-item__name {
+  margin: 0;
+  font: inherit;
+}
+
+.menu-item__trigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-item__trigger:hover {
+  opacity: 0.7;
+}
+
+.menu-item__trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.menu-item__description {
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+.menu-item__price {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+/* EXPANDED PHOTO */
+
+.menu-item__media {
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.menu-item__image {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+.menu-item__image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-item__image-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: -3px;
+}
+
+/* EXPANDABLE INDICATOR */
+
+.menu-item__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-item__indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  border: 1px solid currentColor;
+  border-radius: 50%;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* PHOTO REVEAL */
+
+.menu-item__expandable {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+
+  transition:
+    grid-template-rows 0.45s ease,
+    opacity 0.35s ease;
+}
+
+.menu-item__expandable_open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.menu-item__expandable-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-item__expandable {
+    transition: none;
+  }
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 600px) {
+  .menu-item {
+    padding: 16px 0;
+  }
+
+  .menu-item__image {
+    max-height: 260px;
+  }
+}

@@ -79,9 +79,10 @@ function App() {
       setAuthError("");
 
       await signup(name, email, password, confirmPassword);
-      await handleSignin(email, password);
 
-      return true;
+      const isSuccess = await handleSignin(email, password);
+
+      return isSuccess;
     } catch (err) {
       setAuthError(err.message);
 

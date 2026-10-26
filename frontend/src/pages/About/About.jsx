@@ -29,36 +29,44 @@ function About() {
         </div>
 
         <h1 className="about__title">
-          Your neighborhood
+          More than
           <br />
-          <span className="about__title-accent">table.</span>
+          <span className="about__title-accent">a restaurant.</span>
         </h1>
 
         <p className="about__intro">
-          Saade is a place for food, drinks, music and the people you want to
-          share them with.
+          A celebration of Middle Eastern culture, cuisine, and hospitality.
+          Warm, inviting, and made for moments worth remembering.
         </p>
       </section>
 
       <section className="about__story">
         <div className="about__story-content">
-          <p className="about__eyebrow">ABOUT SAADE</p>
+          <p className="about__eyebrow">THE SAADE EXPERIENCE</p>
 
           <h2 className="about__subtitle">
             Made for
             <br />
-            hanging out.
+            long evenings.
           </h2>
 
           <div className="about__story-text">
             <p>
-              Located in Silver Lake, Saade brings together food, drinks and
-              music in a relaxed space made for sharing.
+              SAADE honors the culinary traditions, ingredients, and hospitality
+              of the Middle East, reinterpreting them through a contemporary
+              lens.
             </p>
 
             <p>
-              Come for a bite, stay for another drink, and make yourself at
-              home.
+              A sunset cocktail turns into dinner. Dinner turns into another
+              bottle of wine. A soulful soundtrack sets the mood without
+              interrupting conversation, and no one feels rushed to leave.
+            </p>
+
+            <p>
+              Natural materials, warm lighting, shared plates, and soulful music
+              create a space that feels collected over time — relaxed, intimate,
+              and full of life.
             </p>
           </div>
         </div>
@@ -67,13 +75,19 @@ function About() {
           <img
             className="about__image"
             src={friendsGroup}
-            alt="Friends sharing dinner at a restaurant"
+            alt="Friends sharing dinner and conversation"
           />
         </div>
       </section>
 
       <section className="about__statement">
-        <p>FOOD · DRINKS · MUSIC · GOOD COMPANY</p>
+        <p>
+          ONE MORE DRINK.
+          <br />
+          ONE MORE STORY.
+          <br />
+          ONE MORE NIGHT.
+        </p>
       </section>
     </main>
   );

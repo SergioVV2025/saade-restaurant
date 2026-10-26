@@ -1,9 +1,11 @@
 import { useState } from "react";
+
 import {
   validateText,
   validateEmail,
   validateForm,
 } from "../../utils/validation";
+
 import Popup from "../../components/Popup/Popup";
 import { createReservation } from "../../utils/reservations.js";
 import { reservationTimes } from "../../utils/reservationConstants";
@@ -46,7 +48,7 @@ function Reservation() {
     if (name === "name") {
       error = validateText({
         value,
-        fieldName: "Nombre",
+        fieldName: "Name",
         minLength: 2,
         maxLength: 40,
       });
@@ -57,24 +59,24 @@ function Reservation() {
     }
 
     if (name === "phone" && !value.trim()) {
-      error = "El teléfono es obligatorio.";
+      error = "Phone number is required.";
     }
 
     if (name === "date" && !value) {
-      error = "La fecha es obligatoria.";
+      error = "Date is required.";
     }
 
     if (name === "time" && !value) {
-      error = "La hora es obligatoria.";
+      error = "Time is required.";
     }
 
     if (name === "guests") {
       const guests = Number(value);
 
       if (!value) {
-        error = "Indica el número de personas.";
+        error = "Please enter the number of guests.";
       } else if (guests < 1 || guests > 20) {
-        error = "El número de personas debe estar entre 1 y 20.";
+        error = "The number of guests must be between 1 and 20.";
       }
     }
 
@@ -133,7 +135,7 @@ function Reservation() {
   const formattedConfirmationDate = confirmedReservation?.date
     ? new Date(
         `${confirmedReservation.date.split("T")[0]}T00:00:00`,
-      ).toLocaleDateString("es-MX", {
+      ).toLocaleDateString("en-US", {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -170,11 +172,13 @@ function Reservation() {
 
             <p className="reservation-page__eyebrow">Come hang</p>
           </div>
+
           <h1 className="reservation-page__title">
             Reserve
             <br />
             your table.
           </h1>
+
           <p className="reservation-page__description">
             Pick a date, bring your people, we&apos;ll take care of the rest.
           </p>
@@ -183,8 +187,9 @@ function Reservation() {
         <form className="reservation" onSubmit={handleSubmit} noValidate>
           <div className="reservation__field">
             <label className="reservation__label" htmlFor="name">
-              Nombre
+              Name
             </label>
+
             <input
               className={`reservation__input ${
                 errors.name ? "reservation__input_error" : ""
@@ -194,9 +199,10 @@ function Reservation() {
               type="text"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Tu nombre"
+              placeholder="Your name"
               required
             />
+
             <span className="reservation__error">{errors.name}</span>
           </div>
 
@@ -204,6 +210,7 @@ function Reservation() {
             <label className="reservation__label" htmlFor="email">
               Email
             </label>
+
             <input
               className={`reservation__input ${
                 errors.email ? "reservation__input_error" : ""
@@ -213,16 +220,18 @@ function Reservation() {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="tu@email.com"
+              placeholder="you@email.com"
               required
             />
+
             <span className="reservation__error">{errors.email}</span>
           </div>
 
           <div className="reservation__field">
             <label className="reservation__label" htmlFor="phone">
-              Teléfono
+              Phone
             </label>
+
             <input
               className={`reservation__input ${
                 errors.phone ? "reservation__input_error" : ""
@@ -232,16 +241,18 @@ function Reservation() {
               type="tel"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Tu teléfono"
+              placeholder="Your phone number"
               required
             />
+
             <span className="reservation__error">{errors.phone}</span>
           </div>
 
           <div className="reservation__field">
             <label className="reservation__label" htmlFor="date">
-              Fecha
+              Date
             </label>
+
             <input
               className={`reservation__input ${
                 errors.date ? "reservation__input_error" : ""
@@ -255,13 +266,15 @@ function Reservation() {
               onChange={handleChange}
               required
             />
+
             <span className="reservation__error">{errors.date}</span>
           </div>
 
           <div className="reservation__field">
             <label className="reservation__label" htmlFor="time">
-              Hora
+              Time
             </label>
+
             <select
               className={`reservation__select ${
                 errors.time ? "reservation__input_error" : ""
@@ -272,7 +285,7 @@ function Reservation() {
               onChange={handleChange}
               required
             >
-              <option value="">Selecciona una hora</option>
+              <option value="">Select a time</option>
 
               {reservationTimes.map((time) => (
                 <option key={time} value={time}>
@@ -280,13 +293,15 @@ function Reservation() {
                 </option>
               ))}
             </select>
+
             <span className="reservation__error">{errors.time}</span>
           </div>
 
           <div className="reservation__field">
             <label className="reservation__label" htmlFor="guests">
-              Número de personas
+              Number of guests
             </label>
+
             <input
               className={`reservation__input ${
                 errors.guests ? "reservation__input_error" : ""
@@ -301,6 +316,7 @@ function Reservation() {
               onChange={handleChange}
               required
             />
+
             <span className="reservation__error">{errors.guests}</span>
           </div>
 
@@ -309,8 +325,9 @@ function Reservation() {
             type="submit"
             disabled={isCreating}
           >
-            {isCreating ? "Reservando..." : "Reservar"}
+            {isCreating ? "Booking..." : "Book a table"}
           </button>
+
           {reservationError && (
             <p className="reservation__error">{reservationError}</p>
           )}
@@ -325,40 +342,41 @@ function Reservation() {
           <p className="confirmation-popup__eyebrow">YOUR TABLE IS READY</p>
 
           <h2 className="confirmation-popup__title">
-            ¡Reserva
+            Reservation
             <br />
-            confirmada!
+            confirmed!
           </h2>
 
-          <p className="confirmation-popup__text">Nos vemos pronto en Saade.</p>
+          <p className="confirmation-popup__text">See you soon at Saade.</p>
 
           <div className="confirmation-popup__details">
             <div className="confirmation-popup__detail">
-              <span className="confirmation-popup__label">Nombre</span>
+              <span className="confirmation-popup__label">Name</span>
               <span>{confirmedReservation?.name}</span>
             </div>
 
             <div className="confirmation-popup__detail">
-              <span className="confirmation-popup__label">Fecha</span>
+              <span className="confirmation-popup__label">Date</span>
               <span>{formattedConfirmationDate}</span>
             </div>
 
             <div className="confirmation-popup__detail">
-              <span className="confirmation-popup__label">Hora</span>
+              <span className="confirmation-popup__label">Time</span>
               <span>{confirmedReservation?.time}</span>
             </div>
 
             <div className="confirmation-popup__detail">
-              <span className="confirmation-popup__label">Personas</span>
+              <span className="confirmation-popup__label">Guests</span>
               <span>{confirmedReservation?.guests}</span>
             </div>
           </div>
+
           <button
             className="confirmation-popup__button"
             type="button"
             onClick={() => setIsConfirmationOpen(false)}
           >
-            Listo
+            Done
           </button>
         </div>
       </Popup>

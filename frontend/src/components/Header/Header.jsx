@@ -4,6 +4,7 @@ import saadeLogo from "../../assets/saade-logo-pink.svg";
 
 function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const customClassName = ({ isActive }) =>
     `header__link ${isActive ? "header__link_active" : ""}`;
 
@@ -16,22 +17,25 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
       <Link className="header__logo" to="/" onClick={handleNavClick}>
         <img className="header__logo-image" src={saadeLogo} alt="Saade" />
       </Link>
+
       <button
         className="header__menu-button"
         type="button"
         aria-expanded={isMenuOpen}
         aria-controls="header-navigation"
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         onClick={() => setIsMenuOpen((current) => !current)}
       >
-        Menú
+        Menu
       </button>
 
       <nav
         id="header-navigation"
         className={`header__nav ${isMenuOpen ? "header__nav_open" : ""}`}
+        aria-label="Main navigation"
       >
         <NavLink to="/" className={customClassName} onClick={handleNavClick}>
-          Inicio
+          Home
         </NavLink>
 
         <NavLink
@@ -39,7 +43,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Menú
+          Menu
         </NavLink>
 
         <NavLink
@@ -47,7 +51,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Nosotros
+          About
         </NavLink>
 
         <NavLink
@@ -55,7 +59,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Galería
+          Gallery
         </NavLink>
 
         <NavLink
@@ -63,7 +67,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Prensa
+          Press
         </NavLink>
 
         <NavLink
@@ -71,7 +75,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Reservar
+          Reservations
         </NavLink>
 
         <NavLink
@@ -79,20 +83,22 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
           className={customClassName}
           onClick={handleNavClick}
         >
-          Explorar
+          Explore
         </NavLink>
+
         {isLoggedIn && (
           <NavLink
             to="/my-reservations"
             className={customClassName}
             onClick={handleNavClick}
           >
-            Mis reservaciones
+            My Reservations
           </NavLink>
         )}
+
         {isLoggedIn ? (
           <div className="header__user">
-            <span className="header__username">Hola, {currentUser?.name}</span>
+            <span className="header__username">Hello, {currentUser?.name}</span>
 
             <button
               className="header__logout"
@@ -102,7 +108,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
                 onSignout();
               }}
             >
-              Cerrar sesión
+              Sign Out
             </button>
           </div>
         ) : (
@@ -114,7 +120,7 @@ function Header({ isLoggedIn, currentUser, onSigninClick, onSignout }) {
               onSigninClick();
             }}
           >
-            Iniciar sesión
+            Sign In
           </button>
         )}
       </nav>

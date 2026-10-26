@@ -42,7 +42,10 @@ function Home() {
           </h2>
 
           <div className="home-intro__copy">
-            <p>Good food, cold drinks, music, and a table worth staying at.</p>
+            <p>
+              Middle Eastern flavors, shared plates, soulful music, and evenings
+              worth lingering over.
+            </p>
 
             <Link className="home-intro__link" to="/menu">
               Explore menu →
@@ -101,18 +104,14 @@ function Home() {
 
           <div className="home-reservation__group">
             <p className="home-reservation__label">Hours</p>
-            <p>
-              Mon–Thu · 5pm–11pm
-              <br />
-              Fri–Sun · 12pm–late
-            </p>
+            <p>Opening hours to be announced.</p>
           </div>
 
           <div className="home-reservation__group">
             <p className="home-reservation__label">Contact</p>
             <p>
-              +1 000 000 0000
-              <br />
+              {/* +1 000 000 0000
+              <br /> */}
               info@santorestaurants.com
             </p>
           </div>

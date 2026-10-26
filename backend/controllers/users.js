@@ -13,11 +13,13 @@ const createUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
     });
+
     return res.status(201).json({
       name: newUser.name,
       email: newUser.email,
@@ -25,12 +27,12 @@ const createUser = async (req, res, next) => {
     });
   } catch (err) {
     if (err.name === "ValidationError") {
-      return next(new BadRequestError("Datos de usuario inválidos."));
+      return next(new BadRequestError("Invalid user information."));
     }
 
     if (err.code === 11000) {
       return next(
-        new ConflictError("El correo electrónico ya está registrado."),
+        new ConflictError("This email address is already registered."),
       );
     }
 
@@ -45,13 +47,13 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      throw new UnauthorizedError("Correo y/o contraseña incorrectos!");
+      throw new UnauthorizedError("Invalid email or password.");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      throw new UnauthorizedError("Correo y/o contraseña incorrectos!");
+      throw new UnauthorizedError("Invalid email or password.");
     }
 
     const token = jsonwebtoken.sign({ _id: user._id }, JWT_SECRET, {
@@ -60,7 +62,7 @@ const login = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: "Bienvenido!",
+      message: "Welcome back!",
       token,
     });
   } catch (err) {
@@ -71,13 +73,14 @@ const login = async (req, res, next) => {
 const getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail();
+
     return res.status(200).json({
       success: true,
       user,
     });
   } catch (err) {
     if (err.name === "DocumentNotFoundError") {
-      return next(new NotFoundError("Usuario no encontrado."));
+      return next(new NotFoundError("User not found."));
     }
 
     next(err);

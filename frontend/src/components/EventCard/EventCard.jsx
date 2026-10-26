@@ -24,7 +24,7 @@ function EventCard({ event }) {
             target="_blank"
             rel="noreferrer"
           >
-            Ver evento
+            View Event
           </a>
         )}
       </div>

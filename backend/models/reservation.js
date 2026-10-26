@@ -14,11 +14,9 @@ const reservationSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // return emailPattern.test(value);
         return validator.isEmail(value);
       },
-      message: "Email inválido!",
+      mmessage: "Invalid email address.",
     },
   },
 

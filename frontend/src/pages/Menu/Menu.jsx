@@ -1,4 +1,6 @@
 import MenuSection from "../../components/MenuSection/MenuSection";
+import MenuItem from "../../components/MenuItem/MenuItem";
+import MenuCategory from "../../components/MenuCategory/MenuCategory";
 
 import menuFoodImage from "../../assets/menu_media/menu-food.jpg";
 import menuDrinksImage from "../../assets/menu_media/menu-drinks.jpg";
@@ -36,37 +38,38 @@ function Menu() {
 
           <div className="menu__intro">
             <p className="menu__description">
-              Good food, cold drinks and plenty to share.
+              Rooted in Middle Eastern traditions, made for sharing.
             </p>
 
             <p className="menu__note">
-              Seasonal plates, drinks and late-night bites made for the table.
+              Familiar ingredients, fresh interpretations, and plates meant to
+              bring everyone together.
             </p>
           </div>
         </div>
       </header>
 
       <div className="menu__sections">
-        <MenuSection title="Food">
-          <p>Seasonal plates</p>
-          <p>Things to share</p>
-          <p>Something sweet</p>
+        <MenuSection title="Food" target="food">
+          <a href="#food-starters">Starters ↘</a>
+          <a href="#food-mains">Main courses ↘</a>
+          <a href="#food-sharing">To share ↘</a>
+          <a href="#food-desserts">Desserts ↘</a>
         </MenuSection>
 
-        <MenuSection title="Drinks">
-          <p>Cocktails</p>
-          <p>Wine</p>
-          <p>Beer</p>
-          <p>Zero proof</p>
+        <MenuSection title="Drinks" target="drinks">
+          <a href="#drinks-cocktails">Cocktails ↘</a>
+          <a href="#drinks-wine">Wine ↘</a>
+          <a href="#drinks-beer">Beer ↘</a>
+          <a href="#drinks-zero-proof">Zero proof ↘</a>
         </MenuSection>
 
-        <MenuSection title="Late night">
-          <p>Snacks</p>
-          <p>Drinks</p>
-          <p>Good decisions optional</p>
+        <MenuSection title="Late night" target="late-night">
+          <a href="#late-snacks">Snacks ↘</a>
+          <a href="#late-drinks">Drinks ↘</a>
         </MenuSection>
       </div>
-      <section className="menu-food">
+      <section className="menu-food" id="food">
         <div className="menu-food__content">
           <p className="menu-food__eyebrow">Food</p>
 
@@ -77,41 +80,30 @@ function Menu() {
           </h2>
 
           <div className="menu-food__list">
-            <div className="menu-food__item">
-              <div>
-                <h3>Charred flatbread</h3>
-                <p>Whipped feta, herbs, chili oil</p>
-              </div>
+            <MenuCategory id="food-starters" title="Starters">
+              <MenuItem
+                name="Charred flatbread"
+                description="Whipped feta, herbs, chili oil"
+                price="$16"
+                image={menuFoodImage}
+                imageAlt="Charred flatbread served at the table"
+              />
 
-              <span>$16</span>
-            </div>
+              <MenuItem
+                name="Roasted carrots"
+                description="Labneh, pistachio, burnt honey"
+                price="$14"
+              />
+            </MenuCategory>
+            <MenuCategory id="food-mains" title="Main courses">
+              <MenuItem
+                name="Grilled chicken"
+                description="Green sauce, charred lemon"
+                price="$24"
+              />
+            </MenuCategory>
 
-            <div className="menu-food__item">
-              <div>
-                <h3>Roasted carrots</h3>
-                <p>Labneh, pistachio, burnt honey</p>
-              </div>
-
-              <span>$14</span>
-            </div>
-
-            <div className="menu-food__item">
-              <div>
-                <h3>Crispy potatoes</h3>
-                <p>Garlic, lemon, herbs</p>
-              </div>
-
-              <span>$12</span>
-            </div>
-
-            <div className="menu-food__item">
-              <div>
-                <h3>Grilled chicken</h3>
-                <p>Green sauce, charred lemon</p>
-              </div>
-
-              <span>$24</span>
-            </div>
+            {/* Las demás categorías las incorporaremos después */}
           </div>
         </div>
 
@@ -123,12 +115,12 @@ function Menu() {
           />
         </div>
       </section>
-      <section className="menu-drinks">
+      <section className="menu-drinks" id="drinks">
         <div className="menu-drinks__media">
           <img
             className="menu-drinks__image"
             src={menuDrinksImage}
-            alt="Food served at the table"
+            alt="Freshly prepared cocktail with herbs and fruit"
           />
         </div>
 
@@ -142,45 +134,39 @@ function Menu() {
           </h2>
 
           <div className="menu-drinks__list">
-            <div className="menu-drinks__item">
-              <div>
-                <h3>House spritz</h3>
-                <p>Citrus, bitter orange, bubbles</p>
-              </div>
+            <MenuCategory id="drinks-cocktails" title="Cocktails">
+              <MenuItem
+                name="House spritz"
+                description="Citrus, bitter orange, bubbles"
+                price="$15"
+                image={menuDrinksImage}
+                imageAlt="Cocktail served with fresh ingredients"
+              />
 
-              <span>$15</span>
-            </div>
+              <MenuItem
+                name="Spicy margarita"
+                description="Tequila, lime, chili, agave"
+                price="$16"
+              />
 
-            <div className="menu-drinks__item">
-              <div>
-                <h3>Spicy margarita</h3>
-                <p>Tequila, lime, chili, agave</p>
-              </div>
+              <MenuItem
+                name="Cold brew martini"
+                description="Vodka, coffee, cacao"
+                price="$17"
+              />
+            </MenuCategory>
 
-              <span>$16</span>
-            </div>
-
-            <div className="menu-drinks__item">
-              <div>
-                <h3>Cold brew martini</h3>
-                <p>Vodka, coffee, cacao</p>
-              </div>
-
-              <span>$17</span>
-            </div>
-
-            <div className="menu-drinks__item">
-              <div>
-                <h3>Garden tonic</h3>
-                <p>Cucumber, herbs, tonic · zero proof</p>
-              </div>
-
-              <span>$10</span>
-            </div>
+            <MenuCategory id="drinks-zero-proof" title="Zero proof">
+              <MenuItem
+                name="Garden tonic"
+                description="Cucumber, herbs, tonic"
+                price="$10"
+              />
+            </MenuCategory>
           </div>
         </div>
       </section>
-      <section className="menu-late">
+      <section className="menu-late" id="late-night">
         <div className="menu-late__header">
           <p className="menu-late__eyebrow">Late night</p>
 
@@ -193,37 +179,36 @@ function Menu() {
 
         <div className="menu-late__body">
           <div className="menu-late__list">
-            <div className="menu-late__item">
-              <div>
-                <h3>Midnight fries</h3>
-                <p>Garlic, herbs, spicy ketchup</p>
-              </div>
+            <MenuCategory id="late-snacks" title="Snacks">
+              <MenuItem
+                name="Midnight fries"
+                description="Garlic, herbs, spicy ketchup"
+                price="$11"
+              />
 
-              <span>$11</span>
-            </div>
+              <MenuItem
+                name="Grilled cheese"
+                description="Three cheeses, chili honey"
+                price="$14"
+              />
+            </MenuCategory>
 
-            <div className="menu-late__item">
-              <div>
-                <h3>Grilled cheese</h3>
-                <p>Three cheeses, chili honey</p>
-              </div>
-
-              <span>$14</span>
-            </div>
-
-            <div className="menu-late__item">
-              <div>
-                <h3>Night cap</h3>
-                <p>Dealer's choice</p>
-              </div>
-
-              <span>$15</span>
-            </div>
+            <MenuCategory id="late-drinks" title="Drinks">
+              <MenuItem
+                name="Night cap"
+                description="Dealer's choice"
+                price="$15"
+              />
+            </MenuCategory>
           </div>
 
           <p className="menu-late__note">Good decisions optional.</p>
         </div>
       </section>
+      <p className="menu__disclaimer">
+        Sample menu for presentation purposes. Dishes, availability, and prices
+        are subject to confirmation.
+      </p>
     </main>
   );
 }

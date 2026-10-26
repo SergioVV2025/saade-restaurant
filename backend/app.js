@@ -27,7 +27,7 @@ app.use("/", routes);
 
 // Si llegamos hasta aquí, ninguna ruta respondió
 app.use((req, res, next) => {
-  next(new NotFoundError("Recurso solicitado no encontrado."));
+  next(new NotFoundError("Requested resource not found."));
 });
 
 app.use(errorLogger);

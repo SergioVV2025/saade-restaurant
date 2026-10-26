@@ -78,25 +78,28 @@ function Explore() {
         </h1>
 
         <p className="explore__subtitle">
-          Find something to do before or after your table at Saade.
+          Find concerts, live shows, sports, and entertainment events around Los
+          Angeles. Make a night of it before or after your visit to Saade.
+        </p>
+        <p className="explore__source">
+          Events and ticket information provided by Ticketmaster. Availability
+          may vary.
         </p>
       </header>
 
       {isLoading && <Preloader />}
-      {/* {true && <Preloader />} */}
 
       <SearchForm onSearch={handleSearch} />
 
       {!isLoading && error && (
         <p className="explore__error">
-          Lo sentimos, algo ha salido mal durante la solicitud. Es posible que
-          haya un problema de conexión o que el servidor no funcione. Por favor,
-          inténtalo más tarde.
+          Something went wrong while loading events. Please check your
+          connection and try again later.
         </p>
       )}
 
       {!isLoading && !error && events.length === 0 && (
-        <p className="explore__empty">No se ha encontrado nada</p>
+        <p className="explore__empty">No events found. Try another search.</p>
       )}
 
       {!isLoading && !error && events.length > 0 && (
@@ -113,7 +116,7 @@ function Explore() {
           type="button"
           onClick={() => setVisibleEvents(visibleEvents + 3)}
         >
-          Mostrar más
+          Show more
         </button>
       )}
     </main>
