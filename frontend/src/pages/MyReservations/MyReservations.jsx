@@ -182,18 +182,18 @@ function MyReservations() {
         </div>
 
         <h1 className="my-reservations__title">
-          Mis
+          My
           <br />
-          reservaciones
+          Reservations
         </h1>
 
         <p className="my-reservations__description">
-          Consulta, modifica o cancela tus próximas visitas a Saade.
+          View, edit, or cancel your upcoming visits to Saade.
         </p>
       </section>
 
       {isLoading && (
-        <p className="my-reservations__status">Cargando reservaciones...</p>
+        <p className="my-reservations__status">Loading reservations...</p>
       )}
 
       {error && (
@@ -205,11 +205,11 @@ function MyReservations() {
       {!isLoading && !error && reservations.length === 0 && (
         <div className="my-reservations__empty">
           <p className="my-reservations__empty-title">
-            Todavía no tienes reservaciones.
+            You don't have any reservations yet.
           </p>
 
           <p className="my-reservations__empty-text">
-            Cuando reserves una mesa, aparecerá aquí.
+            Once you book a table, your reservation will appear here.
           </p>
         </div>
       )}
@@ -221,9 +221,9 @@ function MyReservations() {
               `${reservation.date.split("T")[0]}T00:00:00`,
             );
 
-            const formattedDate = reservationDate.toLocaleDateString("es-MX", {
-              day: "numeric",
+            const formattedDate = reservationDate.toLocaleDateString("en-US", {
               month: "long",
+              day: "numeric",
               year: "numeric",
             });
 
@@ -240,19 +240,19 @@ function MyReservations() {
 
                   <div className="reservation-card__details">
                     <div className="reservation-card__detail">
-                      <span className="reservation-card__label">Fecha</span>
+                      <span className="reservation-card__label">Date</span>
 
                       <span>{formattedDate}</span>
                     </div>
 
                     <div className="reservation-card__detail">
-                      <span className="reservation-card__label">Hora</span>
+                      <span className="reservation-card__label">Time</span>
 
                       <span>{reservation.time}</span>
                     </div>
 
                     <div className="reservation-card__detail">
-                      <span className="reservation-card__label">Personas</span>
+                      <span className="reservation-card__label">Guests</span>
 
                       <span>{reservation.guests}</span>
                     </div>
@@ -271,7 +271,7 @@ function MyReservations() {
                       setEditGuests(reservation.guests);
                     }}
                   >
-                    Editar
+                    Edit
                   </button>
 
                   <button
@@ -282,7 +282,7 @@ function MyReservations() {
                       setReservationToDelete(reservation);
                     }}
                   >
-                    Cancelar
+                    Cancel
                   </button>
                 </div>
               </article>
@@ -295,15 +295,15 @@ function MyReservations() {
           <p className="delete-popup__eyebrow">ARE YOU SURE?</p>
 
           <h2 className="delete-popup__title">
-            Cancelar
+            Cancel
             <br />
-            reservación
+            reservation
           </h2>
 
           <p className="delete-popup__text">
-            Esta acción eliminará tu reservación.
+            This action will delete your reservation.
             <br />
-            ¿Quieres continuar?
+            Do you want to continue?
           </p>
 
           <div className="delete-popup__actions">
@@ -312,7 +312,7 @@ function MyReservations() {
               type="button"
               onClick={closeDeletePopup}
             >
-              No, conservar
+              No, keep it
             </button>
 
             <button
@@ -321,7 +321,7 @@ function MyReservations() {
               onClick={() => handleDelete(reservationToDelete._id)}
               disabled={isDeleting}
             >
-              {isDeleting ? "Cancelando..." : "Sí, cancelar"}
+              {isDeleting ? "Canceling..." : "Yes, cancel"}
             </button>
           </div>
 
@@ -332,11 +332,11 @@ function MyReservations() {
         <div className="edit-reservation">
           <p className="edit-reservation__eyebrow">YOUR TABLE</p>
 
-          <h2 className="edit-reservation__title">Editar reservación</h2>
+          <h2 className="edit-reservation__title">Edit reservation</h2>
 
           <div className="edit-reservation__form">
             <label className="edit-reservation__field">
-              <span className="edit-reservation__label">Fecha</span>
+              <span className="edit-reservation__label">Date</span>
 
               <input
                 className={`edit-reservation__input ${
@@ -356,7 +356,7 @@ function MyReservations() {
             </label>
 
             <label className="edit-reservation__field">
-              <span className="edit-reservation__label">Hora</span>
+              <span className="edit-reservation__label">Time</span>
 
               <select
                 className={`edit-reservation__input ${
@@ -380,7 +380,7 @@ function MyReservations() {
             </label>
 
             <label className="edit-reservation__field">
-              <span className="edit-reservation__label">Personas</span>
+              <span className="edit-reservation__label">Guests</span>
 
               <input
                 className={`edit-reservation__input ${
@@ -412,7 +412,7 @@ function MyReservations() {
                 type="button"
                 onClick={closeEditPopup}
               >
-                Cancelar
+                Cancel
               </button>
 
               <button
@@ -421,7 +421,7 @@ function MyReservations() {
                 onClick={handleUpdate}
                 disabled={isUpdating}
               >
-                {isUpdating ? "Guardando..." : "Guardar"}
+                {isUpdating ? "Saving..." : "Save"}
               </button>
             </div>
           </div>
